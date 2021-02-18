@@ -27,3 +27,14 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Build project
         run: npm run export
+        
+      - name: FTP Deploy
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        with:
+          server: ${{ secrets.server }}
+          username: ${{ secrets.username }}
+          password: ${{ secrets.password }}
+          protocol: ftps
+          local-dir: ./__sapper__/export/
+          dangerous-clean-slate: true
+        
