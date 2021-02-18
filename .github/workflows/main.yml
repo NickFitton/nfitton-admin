@@ -28,13 +28,13 @@ jobs:
       - name: Build project
         run: npm run export
       
-      - name: deploy file
-        uses: wlixcc/SFTP-Deploy-Action@1.1
+      - name: FTP Deploy
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
-          username: ${{ secrets.USER }}
-          server: ${{ secrets.SERVER }}
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} 
-          local_path: './__sapper__/export'
-          remote_path: '/admin.dev.nfitton.com/test'
-          args: '-o ConnectTimeout=5'
-        
+          server: ${{ secrets.server }}
+          username: ${{ secrets.user }}
+          password: ${{ secrets.password }}
+          local-dir: ./__sapper__/export
+          dangerous-clean-slate: true
+          
+          
